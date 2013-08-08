@@ -43,6 +43,27 @@ object MoreCollections {
   // Note how 2nd does not put 2 -> 4 into the Map
   numbers.getOrElseUpdate(2, 4)                   //> res14: Int = 3
   numbers                                         //> res15: scala.collection.mutable.Map[Int,Int] = Map(2 -> 3, 1 -> 2)
-  
-  
+
+  // This is a "for comprehension"
+  for {
+    x <- 1 to 5
+    y <- 3 to 8
+    if (x != y)
+  } yield (x, y)                                  //> res16: scala.collection.immutable.IndexedSeq[(Int, Int)] = Vector((1,3), (1,
+                                                  //| 4), (1,5), (1,6), (1,7), (1,8), (2,3), (2,4), (2,5), (2,6), (2,7), (2,8), (3
+                                                  //| ,4), (3,5), (3,6), (3,7), (3,8), (4,3), (4,5), (4,6), (4,7), (4,8), (5,3), (
+                                                  //| 5,4), (5,6), (5,7), (5,8))
+  val r4 = 'A' to 'Z'                             //> r4  : scala.collection.immutable.NumericRange.Inclusive[Char] = NumericRange
+                                                  //| (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, 
+                                                  //| Z)
+  r1.groupBy(x => if (x % 2 == 0) "even" else "odd")
+                                                  //> res17: scala.collection.immutable.Map[String,scala.collection.immutable.Inde
+                                                  //| xedSeq[Int]] = Map(odd -> Vector(1, 3, 5, 7, 9), even -> Vector(0, 2, 4, 6, 
+                                                  //| 8))
+  r1.groupBy(_ match {
+    case i if ( i % 2 == 0 ) => "even"
+    case _ => "odd"
+  })                                              //> res18: scala.collection.immutable.Map[String,scala.collection.immutable.Ind
+                                                  //| exedSeq[Int]] = Map(odd -> Vector(1, 3, 5, 7, 9), even -> Vector(0, 2, 4, 6
+                                                  //| , 8))
 }
